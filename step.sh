@@ -31,7 +31,11 @@ chat_id="${telegram_chat_id}"
 
 MESSAGE="🛑 *$BITRISE_APP_TITLE*: build $BITRISE_BUILD_NUMBER failed 😕 \\nURL: $BITRISE_APP_URL\\nCommit: $BITRISE_GIT_MESSAGE \\n\\n $custom_message"
 
-if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b>: build $BITRISE_BUILD_NUMBER passed! 🎉\\nCommit: <code>$BITRISE_GIT_MESSAGE</code> \\nDownload URL ⬇️: $download_url \\n\\n$custom_message" ; fi
+if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b>: build $BITRISE_BUILD_NUMBER passed! 🎉
+Commit: $BITRISE_GIT_MESSAGE
+Uploaded to: $download_url
+<i>$custom_message</i>
+" ; fi
 
 payload="{ \"chat_id\": \"'${telegram_chat_id}'\", \"text\":\"$MESSAGE\", \"parse_mode\": \"HTML\" }"
 
