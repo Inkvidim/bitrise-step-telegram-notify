@@ -31,7 +31,7 @@ chat_id="${telegram_chat_id}"
 
 MESSAGE="🛑 *$BITRISE_APP_TITLE*: build $BITRISE_BUILD_NUMBER failed 😕 \\nURL: $BITRISE_APP_URL\\nCommit: $BITRISE_GIT_MESSAGE \\n\\n $custom_message"
 
-if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ *$BITRISE_APP_TITLE*: build $BITRISE_BUILD_NUMBER passed! 🎉\n Commit: $BITRISE_GIT_MESSAGE.\n Uploaded to App Store Connect.\n $custom_message" ; fi
+if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b>: build $BITRISE_BUILD_NUMBER passed! 🎉\\nCommit: <code>$BITRISE_GIT_MESSAGE</code> \\nDownload URL ⬇️: $download_url \\n\\n$custom_message" ; fi
 
 payload="{ \"chat_id\": \"'${telegram_chat_id}'\", \"text\":\"$MESSAGE\", \"parse_mode\": \"HTML\" }"
 
@@ -64,7 +64,7 @@ fi
 RESULT=$(curl -s -X POST "$api_url" \
   -d "chat_id=$chat_id" \
   -d "text=$escaped_message" \
-  -d "parse_mode=Markdown" \
+  -d "parse_mode=HTML" \
   -d "disable_web_page_preview=$disable_preview")
 
 # echo "$payload"
